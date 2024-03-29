@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Cardápio Online</h1> 
+
+  <div id="search-bar" class="sticky">
+    <input type="text" id="search-input" placeholder="Buscar produto..." onkeyup="searchItems()">
+    <span>
+      <button id="view-cart" style="position: absolute;">Visualizar Carrinho</button>
+    </span>
+  </div>
+
+  <div id="menu">
+    <!-- Itens do cardápio serão inseridos aqui dinamicamente -->
+  </div>
+  
+  <!-- Carrinho atualizado -->
+  <div id="cart-view" class="modal" style="display: none;">
+    <button id="close-cart" style="position: absolute; top: 10px; right: 10px; cursor: pointer;">Fechar</button>
+    <h3>Carrinho:</h3>
+    <div id="cart-items">
+      <!-- Itens do carrinho serão inseridos aqui dinamicamente -->
+    </div>
+    <p>Total: <span id="cart-total">R$ 0,00</span></p>
+    <span>
+      <button id="finish-order">Concluir Pedido</button>
+    </span>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

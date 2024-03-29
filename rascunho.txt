@@ -1,0 +1,247 @@
+HTML
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio Online</title>
+  <link rel="stylesheet" href="cardapio.css">
+</head>
+
+<body>
+  <h1>Cardápio Online</h1>
+  <div id="menu">
+    <!-- Itens do cardápio serão inseridos aqui dinamicamente -->
+  </div>
+  <button id="view-cart">Visualizar Carrinho</button>
+  <button id="finish-order">Concluir Pedido</button>
+  <div id="cart-view" style="display: none;">
+    <h3>Carrinho:</h3>
+    <div id="cart-items">
+      <!-- Itens do carrinho serão inseridos aqui dinamicamente -->
+    </div>
+    <p>Total: <span id="cart-total">R$ 0,00</span></p>
+  </div>
+  <script src="cardapio.js"></script>
+</body>
+
+</html>
+
+CSS
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  background-color: #333;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+#menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-gap: 15px;
+  padding: 15px;
+}
+
+.menu-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+}
+
+.menu-item img {
+  width: 100%;
+  display: block;
+  transition: scale 0.3s ease-in-out;
+}
+
+.menu-item:hover img {
+  transform: scale(1.05);
+}
+
+.menu-item h3, .menu-item p {
+  padding: 15px;
+}
+
+.menu-item button {
+  display: block;
+  width: calc(100% - 30px);
+  margin: 15px auto;
+  padding: 10px;
+  background-color: #5cb85c;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.menu-item button:hover {
+  background-color: #4cae4c;
+}
+
+#cart-view {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+#view-cart {
+  position: fixed;
+  right: 15px;
+  bottom: 150px;
+  background-color: #f0ad4e;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#view-cart:hover {
+  background-color: #ec971f;
+}
+
+#finish-order {
+  position: fixed;
+  right: 15px;
+  bottom: 100px;
+  background-color: #d9534f;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#finish-order:hover {
+  background-color: #c9302c;
+}
+
+#cart-items .cart-item img {
+  margin-right: 10px;
+}
+
+#cart-items .cart-item span {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  #menu {
+    grid-template-columns: 1fr;
+  }
+}
+
+JAVASCRIPT
+const menuItems = [
+  {
+    id: 1,
+    title: "Hamburguer",
+    description: "Delicioso hambúrguer com queijo e bacon.",
+    price: "R$ 20,00",
+    image: "hamburguer.jpg",
+  },
+  // Adicione mais itens conforme necessário
+]
+
+const cart = []
+
+function addToCart(itemId) {
+  const item = menuItems.find((item) => item.id === itemId)
+  cart.push(item)
+  alert(`${item.title} adicionado ao carrinho!`)
+  updateCartView()
+}
+
+function viewCart() {
+  const cartView = document.getElementById("cart-view")
+  cartView.style.display = "block"
+}
+
+function updateCartView() {
+  const cartItemsContainer = document.getElementById("cart-items")
+  cartItemsContainer.innerHTML = "" // Clear the cart view
+  cart.forEach((item) => {
+    const cartItem = document.createElement("div")
+    cartItem.className = "cart-item"
+    cartItem.innerHTML = `
+      <img src="${item.image}" alt="${item.title}" style="width:50px; height:auto;">
+      <span>${item.title}</span> - <span>${item.price}</span>
+    `
+    cartItemsContainer.appendChild(cartItem)
+  })
+  updateTotal()
+}
+
+function updateTotal() {
+  const cartTotal = cart.reduce((total, item) => {
+    const priceNumber = parseFloat(
+      item.price.replace("R$ ", "").replace(",", ".")
+    )
+    return total + priceNumber
+  }, 0)
+  const formattedTotal = `R$ ${cartTotal.toFixed(2)}`.replace(".", ",")
+  document.getElementById("cart-total").textContent = formattedTotal
+}
+
+function finishOrder() {
+  let message = "Olá, gostaria de pedir os seguintes itens:\n"
+  cart.forEach((item, index) => {
+    message += `${index + 1}. ${item.title} - ${item.price}\n`
+  })
+  message += `\nTotal: ${document.getElementById("cart-total").textContent}`
+  // Replace 'SEUNUMEROWHATSAPP' with your WhatsApp number
+  const whatsappURL = `https://wa.me/SEUNUMEROWHATSAPP?text=${encodeURIComponent(
+    message
+  )}`
+  window.open(whatsappURL, "_blank")
+}
+
+function createMenuItem(item) {
+  const div = document.createElement("div")
+  div.className = "menu-item"
+  div.innerHTML = `<img src="${item.image}" alt="${item.title}">
+     <h3>${item.title}</h3>
+     <p>${item.description}</p>
+     <p>Preço: ${item.price}</p>
+     <button onclick="addToCart(${item.id})">Adicionar ao Carrinho</button>`
+  return div
+}
+
+function renderMenu() {
+  const menu = document.getElementById("menu")
+  menuItems.forEach((item) => {
+    const menuItemElement = createMenuItem(item)
+    menu.appendChild(menuItemElement)
+  })
+}
+
+document.getElementById("finish-order").addEventListener("click", finishOrder)
+document.getElementById("view-cart").addEventListener("click", viewCart)
+
+renderMenu()

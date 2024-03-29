@@ -1,0 +1,242 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  padding-top: 70px;
+}
+
+h1 {
+  position: fixed; /* Posição fixa na página */
+  z-index: 1000; /* Garante que fiquem por cima de outros elementos */
+  width: 100%; /* Largura total para a tag h1 */
+  background-color: #333; /* Cor de fundo para garantir visibilidade contra elementos sobrescritos durante a rolagem */
+}
+
+h1 {
+  top: 0;
+  left: 0;
+  background-color: #333;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+#view-cart {
+  position: fixed; /* Posição fixa na página */
+  z-index: 1000; /* Garante que fiquem por cima de outros elementos */
+  width: auto; /* Largura automática para ajustar o conteúdo */
+  min-width: 100px; /* Largura mínima para manter a estética do botão */
+  max-width: 200px; /* Largura máxima para evitar que o botão seja muito grande em telas amplas */
+}
+
+#view-cart {
+  /*position: absolute;*/
+  top: 25%;
+  left: 84%;
+  /*bottom: 100%;*/
+  background-color: #f0ad4e;
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1vw;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#view-cart:hover {
+  background-color: #ec971f;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+  background-color: #fff;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+#search-input {
+  width: auto;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-gap: 15px;
+  padding: 15px;
+}
+
+.menu-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+}
+
+.menu-item img {
+  width: 100%;
+  display: block;
+  transition: scale 0.3s ease-in-out;
+}
+
+.menu-item:hover img {
+  transform: scale(1.05);
+}
+
+.menu-item h3,
+.menu-item p {
+  padding: 15px;
+}
+
+.menu-item button {
+  display: block;
+  width: calc(100% - 30px);
+  margin: 15px auto;
+  padding: 10px;
+  background-color: #5cb85c;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.menu-item button:hover {
+  background-color: #4cae4c;
+}
+
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  max-height: 80%;
+  overflow-y: auto;
+  z-index: 1001;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 10px;
+  display: none; /* Garantir que está escondido inicialmente */
+}
+
+#cart-view {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+#finish-order {
+  position: absolute;
+  /*right: 75px;
+  bottom: 250px;*/
+  background-color: #d9534f;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#finish-order:hover {
+  background-color: #c9302c;
+}
+
+#cart-items .cart-item img {
+  margin-right: 10px;
+}
+
+#cart-items .cart-item span {
+  flex: 1;
+}
+
+#cart-view h3 {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+#finish-order {
+  font-size: 12px; /* Botão menor */
+  padding: 5px 10px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart-item button {
+  margin-left: auto; /* Botão excluir para o lado direito */
+  background-color: #d9534f;
+  padding: 5px;
+  font-size: 10px;
+}
+
+.cart-item img {
+  height: 50px; /* Ajustar altura da imagem */
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1;
+}
+
+#close-cart {
+  border: none;
+  background: transparent;
+  color: black;
+  font-size: 16px;
+}
+
+@media (max-width: 500px) {
+  #view-cart {
+    width: 35%; /* 100% da largura da tela menos 30px de margem */
+    left: 185px; /* 15px da esquerda na visualização móvel */
+    bottom: 15px;
+    padding: 10px; /* Padding menor para telas menores */
+    font-size: 3vw; /* Aumento adicional para dispositivos muito pequenos */
+  }  
+   #menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); /* Muda para uma coluna fluida dependendo do tamanho disponível */
+    grid-gap: 5px; /* Espaçamento de 5px entre os itens */
+    padding: 10px; /* Padding de 10px */
+  }
+
+  .menu-item h3,
+  .menu-item p {
+    font-size: 80%; /* Reduz o tamanho da fonte dos cabeçalhos e parágrafos dos itens do menu */
+  }
+  
+}
