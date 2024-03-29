@@ -237,6 +237,7 @@ h1 {
   .menu-item h3,
   .menu-item p {
     font-size: 80%; /* Reduz o tamanho da fonte dos cabeçalhos e parágrafos dos itens do menu */
+    line-height: 1; /* Diminui o espaçamento entre linhas */
   }
   
 }
