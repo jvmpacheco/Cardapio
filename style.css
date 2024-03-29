@@ -221,8 +221,8 @@ h1 {
 
 @media (max-width: 500px) {
   #view-cart {
-    width: 35%; /* 100% da largura da tela menos 30px de margem */
-    right: 25px; /* 15px da esquerda na visualização móvel */
+    width: 35%; 
+    left: 64%; 
     bottom: 15px;
     padding: 10px; /* Padding menor para telas menores */
     font-size: 3vw; /* Aumento adicional para dispositivos muito pequenos */
